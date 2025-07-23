@@ -2,6 +2,8 @@ import Fastify from "fastify"
 import cors from "@fastify/cors"
 import { movieRoutes } from "./routes/movieRoutes"
 
+const PORT = 3000
+
 async function bootstrap() {
   const app = Fastify()
 
@@ -11,9 +13,9 @@ async function bootstrap() {
 
   app.register(movieRoutes)
 
-  await app.listen({ port: 3000 })
+  await app.listen({ port: PORT })
 
-  console.log("Server running on http://localhost:3000")
+  console.log(`Server running on http://localhost:${PORT}`)
 }
 
 bootstrap()

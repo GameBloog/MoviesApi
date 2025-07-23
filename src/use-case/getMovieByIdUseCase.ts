@@ -1,8 +1,10 @@
-import { MovieDetail } from "src/entities/movieDetail"
-import moviesData from "../data/moviesData"
+import { MovieDetail } from "src/entities/movie"
+import { MovieRepository } from "src/repositories/movieRepository"
 
 export class GetMovieByIdUseCase {
+  constructor(private movieRepository: MovieRepository) {}
+
   execute(imdbID: string): MovieDetail | undefined {
-    return moviesData.movieDetails.find((movie) => movie.imdbID === imdbID)
+    return this.movieRepository.findMovieById(imdbID)
   }
 }

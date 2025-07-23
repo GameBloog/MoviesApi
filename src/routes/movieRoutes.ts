@@ -1,9 +1,14 @@
 import { FastifyInstance } from "fastify"
-import { MovieController } from "src/controllers/movieController"
+import { ListMoviesController } from "src/controllers/listMoviesController"
+import { GetMovieByIdController } from "src/controllers/getMovieByIdController"
 
 export async function movieRoutes(app: FastifyInstance) {
-  const controller = new MovieController()
+  const listMoviesController = new ListMoviesController()
+  const getMovieByIdController = new GetMovieByIdController()
 
-  app.get("/movies", controller.listMovies.bind(controller))
-  app.get("/movies/:id", controller.getMovieById.bind(controller))
+  app.get("/movies", listMoviesController.listMovies.bind(listMoviesController))
+  app.get(
+    "/movies/:id",
+    getMovieByIdController.getMovieById.bind(getMovieByIdController)
+  )
 }

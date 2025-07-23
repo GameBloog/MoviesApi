@@ -1,16 +1,10 @@
-import { SearchMovie } from "src/entities/searchMovie"
-import moviesData from "src/data/moviesData"
+import { SearchMovie } from "src/entities/movie"
+import { MovieRepository } from "src/repositories/movieRepository"
 
 export class ListMoviesUseCase {
-  execute(query?: string): SearchMovie[] {
-    const results = moviesData.searchResults
+  constructor(private movieRepository: MovieRepository) {}
 
-    if (!query) return results
-
-    const lowerQuery = query.toLowerCase()
-
-    return results.filter((movie) =>
-      movie.Title.toLowerCase().includes(lowerQuery)
-    )
+  execute(search?: string): SearchMovie[] {
+    return this.movieRepository.searchMovies(search)
   }
 }
